@@ -42,7 +42,7 @@ class RunManager:
         grid = torchvision.utils.make_grid(images)
 
         self.tb.add_image('images', grid)
-        self.tb.add_graph(self.network, images)
+        self.tb.add_graph(self.network, images.to(getattr(run, 'device', 'cpu')))
 
     def end_run(self):
         self.tb.close()
